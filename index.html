@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vinted — Japan Style Gürtel</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#007a6a;--teal-dark:#006356;--ink:#2c2c2c;--muted:#5d6667;--line:#ececec;
+  --pill:#eef2f2;--search-bg:#f5f8f8;--container:1400px;--header-h:76px;--nav-h:48px;--radius:8px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#fff;color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size:15px;line-height:1.4;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button,input{font:inherit;color:inherit}
+button{background:none;border:0;cursor:pointer;padding:0}
+a{color:inherit;text-decoration:none;cursor:pointer}
+svg{display:block}
+img{display:block;max-width:100%}
+.container{width:100%;max-width:var(--container);margin:0 auto}
+
+.header-top{height:var(--header-h);background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
+.header-top .container{height:100%;display:flex;align-items:center;gap:20px}
+.burger{display:none;width:42px;height:42px;border-radius:50%;align-items:center;justify-content:center;color:#4d5556;flex-shrink:0}
+.burger svg{width:24px;height:24px}
+.brand{flex-shrink:0;display:flex;align-items:center;padding-right:8px;
+  font-family:'Pacifico','Brush Script MT',cursive;font-size:40px;line-height:1;
+  color:var(--teal);letter-spacing:-1px}
+.brand img{width:100px;height:auto;display:block}
+.brand img:not([src]),.brand img[src=""]{display:none}
+
+.search-group{flex:1;min-width:0;display:flex;height:46px}
+.catalog-btn{flex-shrink:0;height:100%;padding:0 16px;background:var(--pill);color:#3a4445;
+  font-size:15px;font-weight:500;display:flex;align-items:center;gap:8px;
+  border-radius:var(--radius) 0 0 var(--radius)}
+.catalog-btn:hover{background:#e3eaea}
+.catalog-btn .chev{width:14px;height:14px;color:#5b6565}
+.search-box{flex:1;min-width:0;height:100%;background:var(--search-bg);
+  display:flex;align-items:center;gap:10px;padding:0 14px;
+  border-radius:0 var(--radius) var(--radius) 0}
+.search-box .magnifier{width:20px;height:20px;color:#6c7676;flex-shrink:0}
+.search-box input{flex:1;min-width:0;border:0;outline:0;background:transparent;font-size:15px;color:#333}
+.search-box input::placeholder{color:#8a9292}
+.camera-btn{flex-shrink:0;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--teal)}
+.camera-btn svg{width:21px;height:21px}
+
+.search-icon-btn{display:none;width:42px;height:42px;border-radius:50%;align-items:center;justify-content:center;color:#4d5556;flex-shrink:0}
+.search-icon-btn svg{width:22px;height:22px;stroke-width:1.8}
+
+.actions{flex-shrink:0;display:flex;align-items:center;gap:4px}
+.icon-btn{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#4d5556;flex-shrink:0}
+.icon-btn svg{width:24px;height:24px;stroke-width:1.6}
+.avatar-btn{height:42px;display:flex;align-items:center;gap:2px;padding:0 4px 0 0;border-radius:21px;flex-shrink:0}
+.avatar-circle{width:34px;height:34px;border-radius:50%;background:#e2e7e7;color:#9aa3a3;
+  display:flex;align-items:center;justify-content:center;overflow:hidden}
+.avatar-circle svg{width:22px;height:22px}
+.avatar-btn .chev{width:12px;height:12px;color:#5b6565;margin-left:1px}
+.sell-btn{height:40px;padding:0 22px;margin-left:8px;background:var(--teal);color:#fff;
+  border-radius:var(--radius);font-size:15px;font-weight:700;white-space:nowrap}
+.help-btn{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#4d5556;flex-shrink:0}
+.help-btn svg{width:24px;height:24px;stroke-width:1.6}
+.lang-btn{height:42px;padding:0 8px 0 10px;display:flex;align-items:center;gap:6px;
+  font-size:15px;font-weight:600;color:#4d5556;border-radius:21px;flex-shrink:0}
+.lang-btn .flag{width:20px;height:13px;border-radius:2px;
+  background:linear-gradient(#000 0 33.3%, #dd0000 33.3% 66.6%, #ffce00 66.6% 100%);flex-shrink:0}
+.lang-btn .chev{width:12px;height:12px;color:#5b6565}
+
+.header-nav{height:var(--nav-h);background:#fff;border-bottom:1px solid var(--line);
+  position:sticky;top:var(--header-h);z-index:49}
+.header-nav .container{height:100%;display:flex;justify-content:flex-start;align-items:center;
+  gap:32px;overflow-x:auto;scrollbar-width:none;padding-left:28px;-webkit-overflow-scrolling:touch}
+.header-nav .container::-webkit-scrollbar{display:none}
+.header-nav .nav-item{color:#5d6667;font-size:15px;white-space:nowrap}
+
+.main{max-width:var(--container);margin:28px auto 60px;padding:0 20px;
+  display:grid;grid-template-columns:1fr 396px;gap:54px;align-items:start}
+
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:2px;height:625px}
+.photo{position:relative;overflow:hidden;background:#f2f2f2}
+.photo.left{border-radius:6px 0 0 6px}
+.photo.right{border-radius:0 6px 6px 0}
+.photo img{width:100%;height:100%;object-fit:cover;display:block;cursor:zoom-in}
+
+.photo-action-row{height:48px;display:flex;justify-content:flex-end;align-items:center}
+.report-photo{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#6b7576}
+.report-photo svg{width:20px;height:20px}
+
+.breadcrumbs{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:14px;color:#656f70;margin-top:6px}
+.breadcrumbs a{text-decoration:underline;text-underline-offset:2px}
+.breadcrumbs span{color:#a3abab}
+
+.sold-panel{background:#fff;border-radius:6px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.sold-header{position:relative;height:47px;background:var(--teal);color:#fff;display:flex;align-items:center;padding:0 17px;font-size:16px;font-weight:700}
+.sold-header svg{width:16px;height:16px;margin-right:8px}
+.sold-notch{position:absolute;right:72px;top:0;width:0;height:0;border-top:47px solid rgba(255,255,255,.10);border-left:31px solid transparent}
+.sold-body{padding:22px;border:1px solid #e7e7e7;border-top:0;border-radius:0 0 6px 6px}
+.sold-price{font-size:22px;font-weight:700;margin-bottom:3px}
+.sold-protection{font-size:14px;color:#5d6666;display:flex;align-items:center;gap:5px}
+.mini-info{display:inline-flex;width:15px;height:15px;border:1px solid #6a7474;border-radius:50%;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-style:italic;color:#6a7474}
+
+.get-money{width:100%;height:46px;margin-top:90px;background:var(--teal);color:#fff;border-radius:6px;font-size:16px;font-weight:700}
+.fee-info{display:flex;gap:11px;margin-top:24px;color:#5d6666;font-size:14px;line-height:1.45}
+.fee-icon{width:58px;height:58px;flex:none;display:flex;align-items:center;justify-content:center}
+.fee-icon img{width:100%;height:100%;object-fit:contain;display:block}
+.fee-title{color:#313838;font-weight:700;margin-bottom:3px}
+.fee-copy a{color:var(--teal);text-decoration:underline}
+
+.seller-card{margin-top:16px;border:1px solid #e2e2e2;border-radius:6px;min-height:84px;padding:14px 16px;
+  display:flex;align-items:center;background:#fff;cursor:pointer}
+.seller-avatar{width:50px;height:50px;border-radius:50%;background:#e8ecec;color:#9aa3a3;
+  display:flex;align-items:center;justify-content:center;flex:none;overflow:hidden}
+.seller-avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.seller-info{margin-left:14px;min-width:0}
+.seller-name{font-size:16px;font-weight:700;margin-bottom:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.seller-rating{font-size:14px;color:#8a9090}
+.seller-rating .star{color:#f5a623}
+.seller-chevron{margin-left:auto;color:#606a6a;font-size:28px;line-height:1;font-weight:300}
+
+.consumer-note{margin:22px 4px 0;color:#697272;font-size:13.5px;line-height:1.55}
+.consumer-note a{color:#697272;text-decoration:underline}
+
+/* ============ ЛАЙТБОКС ============ */
+.lightbox{
+  position:fixed;inset:0;z-index:200;
+  background:rgba(0,0,0,.92);
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;
+  opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s;
+}
+.lightbox.is-open{opacity:1;visibility:visible}
+.lightbox img{
+  max-width:100%;max-height:100%;
+  object-fit:contain;border-radius:6px;
+  animation:lbPop .25s ease-out;
+}
+@keyframes lbPop{
+  from{opacity:0;transform:scale(.96)}
+  to{opacity:1;transform:scale(1)}
+}
+.lightbox__close{
+  position:fixed;top:16px;right:16px;
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(255,255,255,.15);color:#fff;
+  font-size:26px;line-height:1;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .15s;
+}
+.lightbox__close:hover{background:rgba(255,255,255,.25)}
+
+@media(max-width:1100px){
+  .icon-btn--hide-md{display:none}
+  .header-nav .container{gap:22px;padding-left:20px}
+  .main{gap:32px;grid-template-columns:1fr 340px}
+  .get-money{margin-top:60px}
+}
+@media(max-width:900px){
+  .search-group{display:none}
+  .search-icon-btn{display:flex}
+  .catalog-btn{display:none}
+  .help-btn,.lang-btn{display:none}
+  .header-top .container{gap:8px}
+  .brand img{width:80px}
+  .header-nav .container{padding-left:16px;gap:20px}
+  .header-nav .nav-item{font-size:14px}
+  .main{grid-template-columns:1fr;gap:22px;padding:0 16px;margin-top:20px}
+  .gallery{height:auto;grid-template-columns:1fr 1fr;gap:2px}
+  .photo.left{border-radius:8px 0 0 8px}
+  .photo.right{border-radius:0 8px 8px 0}
+  .photo{aspect-ratio:3/4}
+  .get-money{margin-top:24px}
+}
+@media(max-width:600px){
+  :root{--header-h:60px}
+  .burger{display:flex}
+  .brand img{width:70px}
+  .sell-btn{padding:0 14px;font-size:13px;height:36px}
+  .avatar-circle{width:30px;height:30px}
+  .avatar-circle svg{width:19px;height:19px}
+  .avatar-btn .chev{display:none}
+  .icon-btn{width:38px;height:38px}
+  .icon-btn svg{width:22px;height:22px}
+  .search-icon-btn{width:38px;height:38px}
+  .actions{gap:2px}
+  .header-nav{height:44px}
+  .header-nav .container{padding-left:12px;gap:16px}
+  .header-nav .nav-item{font-size:13.5px}
+  .main{padding:0 12px;margin-top:14px;margin-bottom:40px;gap:18px}
+  .gallery{grid-template-columns:1fr 1fr;gap:2px;height:auto}
+  .photo{aspect-ratio:3/4}
+  .photo-action-row{height:40px}
+  .report-photo{width:34px;height:34px}
+  .breadcrumbs{font-size:12.5px;gap:5px;margin-top:2px;line-height:1.5}
+  .sold-header{height:44px;font-size:15px;padding:0 14px}
+  .sold-body{padding:18px 16px}
+  .sold-price{font-size:20px}
+  .get-money{height:48px;margin-top:20px;font-size:15.5px}
+  .fee-info{gap:12px;margin-top:18px;font-size:13.5px;line-height:1.5}
+  .fee-icon{width:48px;height:48px}
+  .fee-title{font-size:14.5px}
+  .seller-card{padding:12px 14px;min-height:72px;margin-top:12px}
+  .seller-avatar{width:44px;height:44px}
+  .seller-name{font-size:15px}
+  .seller-rating{font-size:13px}
+  .consumer-note{font-size:13px;margin-top:16px;margin-left:0;margin-right:0}
+  .lightbox{padding:12px}
+  .lightbox__close{top:10px;right:10px;width:40px;height:40px;font-size:22px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <div class="container">
+      <button class="burger" aria-label="Menü">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+
+      <a class="brand" href="https://www.vinted.de" target="_blank" rel="noopener" aria-label="Vinted">
+        <img src="assets/vinted-logo.png" alt="Vinted">
+      </a>
+
+      <div class="search-group">
+        <button class="catalog-btn" onclick="window.location.href='https://www.vinted.de'">
+          Katalog
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="search-box">
+          <svg class="magnifier" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input type="search" placeholder="Suche Artikel" onfocus="window.location.href='https://www.vinted.de'">
+          <button class="camera-btn" onclick="window.location.href='https://www.vinted.de'">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round">
+              <path d="M5 7h2l1.4-2.2A1 1 0 0 1 9.2 4.4h5.6a1 1 0 0 1 .8.4L17 7h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2z"/>
+              <circle cx="12" cy="13" r="3.6"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <button class="search-icon-btn" onclick="window.location.href='https://www.vinted.de'">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </button>
+
+      <div class="actions">
+        <button class="icon-btn icon-btn--hide-md" onclick="window.location.href='https://www.vinted.de'">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="m3.5 7 8.5 6 8.5-6"/></svg>
+        </button>
+        <button class="icon-btn icon-btn--hide-md" onclick="window.location.href='https://www.vinted.de'">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 8-3 8h18s-3-1-3-8"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+        </button>
+        <button class="icon-btn" onclick="window.location.href='https://www.vinted.de'">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1L12 21.2l7.7-7.8 1.1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+        </button>
+        <button class="avatar-btn" onclick="window.location.href='https://www.vinted.de'">
+          <span class="avatar-circle">
+            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8.5" r="3.6"/><path d="M4.6 20c1.2-3.8 4-5.8 7.4-5.8s6.2 2 7.4 5.8"/></svg>
+          </span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <button class="sell-btn" onclick="window.location.href='https://www.vinted.de'">Artikel verkaufen</button>
+        <button class="help-btn" onclick="window.location.href='https://www.vinted.de'">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.6a2.5 2.5 0 1 1 3.3 2.4c-.7.3-1 .9-1 1.6v.2"/><circle cx="12" cy="17" r=".6" fill="currentColor" stroke="none"/></svg>
+        </button>
+        <button class="lang-btn" onclick="window.location.href='https://www.vinted.de'">
+          <span class="flag"></span> DE
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <nav class="header-nav">
+    <div class="container">
+      <a class="nav-item" href="https://www.vinted.de" target="_blank" rel="noopener">Damen</a>
+      <a class="nav-item" href="https://www.vinted.de" target="_blank" rel="noopener">Herren</a>
+      <a class="nav-item" href="https://www.vinted.de" target="_blank" rel="noopener">Designerartikel</a>
+      <a class="nav-item" href="https://www.vinted.de" target="_blank" rel="noopener">Kinder</a>
+      <a class="nav-item" href="https://www.vinted.de" target="_blank" rel="noopener">Home</a>
+      <a class="nav-item" href="https://www.vinted.de" target="_blank" rel="noopener">Elektronik</a>
+      <a class="nav-item" href="https://www.vinted.de" target="_blank" rel="noopener">Bücher &amp; andere Medien</a>
+      <a class="nav-item" href="https://www.vinted.de" target="_blank" rel="noopener">Hobby- &amp; Sammlerartikel</a>
+      <a class="nav-item" href="https://www.vinted.de" target="_blank" rel="noopener">Sport</a>
+    </div>
+  </nav>
+</header>
+
+<main class="main">
+  <section>
+    <div class="gallery">
+      <div class="photo left"><img src="assets/product-1.jpg" alt="Japan Style Gürtel"></div>
+      <div class="photo right"><img src="assets/product-2.jpg" alt="Japan Style Gürtel Detail"></div>
+    </div>
+    <div class="photo-action-row">
+      <button class="report-photo" onclick="window.location.href='https://www.vinted.de'">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M6 20V4h11l-2 3 2 3H6"/></svg>
+      </button>
+    </div>
+    <div class="breadcrumbs">
+      <a href="https://www.vinted.de" target="_blank" rel="noopener">Herren</a><span>/</span>
+      <a href="https://www.vinted.de" target="_blank" rel="noopener">Accessoires</a><span>/</span>
+      <a href="https://www.vinted.de" target="_blank" rel="noopener">Gürtel</a><span>/</span>
+      <a href="https://www.vinted.de" target="_blank" rel="noopener">Japan Style Gürtel</a>
+    </div>
+  </section>
+
+  <aside>
+    <div class="sold-panel">
+      <div class="sold-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+        Verkauft
+        <span class="sold-notch"></span>
+      </div>
+      <div class="sold-body">
+        <div class="sold-price">35,0 €</div>
+        <div class="sold-protection">Inklusive Vinted-Käuferschutz <span class="mini-info">i</span></div>
+        <button class="get-money" onclick="window.location.href='payout.html'">Geld bekommen</button>
+        <div class="fee-info">
+          <div class="fee-icon"><img src="assets/shield-icon.png" alt=""></div>
+          <div class="fee-copy">
+            <div class="fee-title">Käuferschutz-Gebühr</div>
+            Unser <a href="https://www.vinted.de" target="_blank" rel="noopener">Vinted-Käuferschutz</a> wird gegen eine Gebühr auf jeden Kauf angewendet, der über den „Kaufen“-Button erfolgt. Für den Käuferschutz gelten unsere <a href="https://www.vinted.de" target="_blank" rel="noopener">Rückerstattungsrichtlinien</a>.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="seller-card" onclick="window.location.href='https://www.vinted.de'">
+      <div class="seller-avatar"><img src="assets/emily-avatar.jpg" alt=""></div>
+      <div class="seller-info">
+        <div class="seller-name">emily88001</div>
+        <div class="seller-rating"><span class="star">★</span> 4,9 · 128 Bewertungen</div>
+      </div>
+      <div class="seller-chevron">›</div>
+    </div>
+
+    <div class="consumer-note">
+      Das Verbraucherschutzgesetz gilt nicht, wenn du von anderen Verbrauchern kaufst.<br><br>
+      Insbesondere sind weder das Widerrufsrecht nach <a href="https://www.vinted.de" target="_blank" rel="noopener">§§ 355 ff. BGB</a> noch die zweijährigen <a href="https://www.vinted.de" target="_blank" rel="noopener">Gewährleistungsrechte</a> anwendbar.
+    </div>
+  </aside>
+</main>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox__close" id="lbClose" aria-label="Schließen">&times;</button>
+  <img id="lbImg" src="" alt="">
+</div>
+
+<script>
+  const lightbox = document.getElementById('lightbox');
+  const lbImg    = document.getElementById('lbImg');
+  const lbClose  = document.getElementById('lbClose');
+
+  document.querySelectorAll('.photo img').forEach(img => {
+    img.addEventListener('click', () => {
+      lbImg.src = img.src;
+      lightbox.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function closeLightbox(){
+    lightbox.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+  lbClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', e => {
+    if(e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', e => {
+    if(e.key === 'Escape') closeLightbox();
+  });
+</script>
+
+</body>
+</html>
